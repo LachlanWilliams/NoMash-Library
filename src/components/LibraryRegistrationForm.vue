@@ -8,7 +8,8 @@ const formData = ref({
   password: '',
   isAustralian: false,
   reason: '',
-  gender: ''
+  gender: '',
+  confirmPassword: ''
 })
 
 const submittedCards = ref([])
@@ -16,7 +17,8 @@ const submittedCards = ref([])
 const submitForm = () => {
   validateName(true)
   validatePassword(true)
-  if (!errors.value.username && !errors.value.password) {
+  validateConfirmPassword(true)
+  if (!errors.value.username && !errors.value.password && !errors.value.confirmPassword) {
     submittedCards.value.push({ ...formData.value })
     clearForm()
   }
@@ -28,7 +30,8 @@ const clearForm = () => {
     password: '',
     isAustralian: false,
     reason: '',
-    gender: ''
+    gender: '',
+    confirmPassword: '',
   }
 }
 
@@ -37,7 +40,8 @@ const errors = ref({
   password: null,
   resident: null,
   gender: null,
-  reason: null
+  reason: null,
+  confirmPassword: null
 })
 
 const validateName = (blur) => {
@@ -70,6 +74,30 @@ const validatePassword = (blur) => {
     errors.value.password = null
   }
 }
+
+const validateConfirmPassword = (blur) => {
+  const confirmPassword = formData.value.confirmPassword
+  const password = formData.value.password
+
+  if (confirmPassword == password) {
+    if (blur) errors.value.confirmPassword = 'Confirm password must be the same a the password.'
+  } else {
+    errors.value.confirmPassword = null
+  }
+}
+
+// const validateReason = (blur) => {
+//   const reason = formData.value.reason
+//   const friend = "friend"
+  
+//   if (reason.includes(friend)){
+//     if (blur) errors.value.reason = 'Great to have a friend'
+//   } else {
+//     errors.value.reason = null
+//   }
+// }
+
+
 </script>
 
 <template>
@@ -98,6 +126,16 @@ const validatePassword = (blur) => {
             </div>
 
             <div class="col-md-6 col-sm-6">
+              <label for="gender" class="form-label">Gender</label>
+              <select class="form-select" id="gender" v-model="formData.gender" required>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-6 col-sm-6">
               <label for="password" class="form-label">Password</label>
               <input
                 type="password"
@@ -109,10 +147,21 @@ const validatePassword = (blur) => {
               />
               <div v-if="errors.password" class="text-danger">{{ errors.password }}</div>
             </div>
-          </div>
-          <div class="row mb-3">
             <div class="col-md-6 col-sm-6">
-              <div class="form-check">
+              <label for="confirmpassword" class="form-label">Confirm Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="confirmPassword"
+                @blur="() => validateConfirmPassword(true)"
+                @input="() => validateConfirmPassword(false)"
+                v-model="formData.confirmPassword"
+              />
+              <div v-if="errors.confirmPassword" class="text-danger">{{ errors.confirmPassword }}</div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <div class="form-check">
                 <input
                   type="checkbox"
                   class="form-check-input"
@@ -121,15 +170,6 @@ const validatePassword = (blur) => {
                 />
                 <label class="form-check-label" for="isAustralian">Australian Resident?</label>
               </div>
-            </div>
-            <div class="col-md-6 col-sm-6">
-              <label for="gender" class="form-label">Gender</label>
-              <select class="form-select" id="gender" v-model="formData.gender" required>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
-              </select>
-            </div>
           </div>
           <div class="mb-3">
             <label for="reason" class="form-label">Reason for joining</label>
@@ -139,6 +179,7 @@ const validatePassword = (blur) => {
               rows="3"
               v-model="formData.reason"
             ></textarea>
+            <div v-if="errors.reason" class="text-danger">{{ errors.reason }}</div>
           </div>
           <div class="text-center">
             <button type="submit" class="btn btn-primary me-2">Submit</button>
