@@ -6,6 +6,7 @@ import FirebaseSigninView from '@/views/FirebaseSigninView.vue'
 import FirebaseRegisterView from '@/views/FirebaseRegisterView.vue'
 import LibrarianDashboardView from '@/views/LibrarianDashboardView.vue'
 import LogoutPage from '@/views/LogoutPage.vue'
+import AddBookView from '@/views/AddBookView.vue'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import { getFirestore, doc, getDoc } from 'firebase/firestore'
 import { ref } from 'vue'
@@ -18,6 +19,11 @@ const routes = [
     path: '/',
     name: 'Home',
     component: HomeView
+  },
+  {
+    path: '/addBook',
+    name: 'AddBook',
+    component: AddBookView
   },
   {
     path: '/about',
