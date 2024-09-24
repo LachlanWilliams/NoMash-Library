@@ -2,6 +2,7 @@
 import { ref } from 'vue';  
 import db from '@/firebase';
 import { collection,addDoc } from 'firebase/firestore';
+import BookList from '@/components/BookList.vue';
 
 export default {
     setup() {
@@ -11,7 +12,7 @@ export default {
         const addBook = async () => {
             try{
                 const isbnNumber = Number(isbn.value)
-                if (isNaN(isbn)){
+                if (isNaN(isbnNumber)){
                     alert("ISBN must be a valid number");
                     return;
                 }
@@ -31,6 +32,9 @@ export default {
             name,
             addBook
         };
+    },
+    components: {
+        BookList
     }
 };
 </script>
@@ -48,6 +52,9 @@ export default {
             </div>
             <button type="submit">Add Book</button>
         </form>
+    </div>
+    <div>
+        <BookList/>
     </div>
 
 </template>

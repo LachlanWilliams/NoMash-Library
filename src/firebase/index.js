@@ -8,7 +8,7 @@ const firebaseConfig = {
     storageBucket: "week7-lachlan.appspot.com",
     messagingSenderId: "878440406644",
     appId: "1:878440406644:web:b1412602d46640bce87b21"
-};
+  };
 
 initializeApp(firebaseConfig)
 const db = getFirestore()
