@@ -8,7 +8,9 @@
  */
 
 const {onRequest} = require("firebase-functions/v2/https");
-// const logger = require("firebase-functions/logger");
+const {onDocumentCreated} = require("firebase-functions/v2/firestore");
+
+const logger = require("firebase-functions/logger");
 const admin = require("firebase-admin");
 const cors = require("cors")({origin: true});
 
@@ -27,6 +29,16 @@ exports.countBooks = onRequest((req, res) => {
       res.status(500).send("Error counting books");
     }
   });
+});
+
+// eslint-disable-next-line max-len
+exports.capitalizeBookData = onDocumentCreated("/books/{documentId}", (event) => {
+  const lower = event.data.data().name;
+  logger.log("Uppercasing", event.params.documentId, lower);
+
+  const name = lower.toUpperCase();
+
+  return event.data.ref.set({name}, {merge: true});
 });
 
 // Create and deploy your first functions
