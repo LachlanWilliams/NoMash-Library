@@ -5,6 +5,7 @@ import LoginView from '../views/LoginView.vue'
 import FirebaseSigninView from '@/views/FirebaseSigninView.vue'
 import FirebaseRegisterView from '@/views/FirebaseRegisterView.vue'
 import LibrarianDashboardView from '@/views/LibrarianDashboardView.vue'
+import GetBookCountView from '@/views/GetBookCountView.vue'
 import LogoutPage from '@/views/LogoutPage.vue'
 import AddBookView from '@/views/AddBookView.vue'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
@@ -64,6 +65,11 @@ const routes = [
     path: "/Logout",
     name: "Logout",
     component: LogoutPage
+  },
+  {
+    path: "/GetBookCount",
+    name: "GetBookCount",
+    component: GetBookCountView
   }
 ]
 

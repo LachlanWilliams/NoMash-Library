@@ -17,6 +17,11 @@
             Add Book
           </router-link>
         </li>
+        <li class="nav-item">
+          <router-link to="/GetBookCount" class="nav-link" active-class="active">
+            Get Book Count
+          </router-link>
+        </li>
         <li v-if="!isAuthenticated" class="nav-item">
           <router-link to="/FireLogin" class="nav-link" active-class="active">
             Firebase Login
