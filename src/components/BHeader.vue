@@ -22,6 +22,11 @@
             Get Book Count
           </router-link>
         </li>
+        <div>
+          <router-link to="/WeatherCheck" class="nav-link" active-class="active">
+            Weather Check
+          </router-link>
+        </div>
         <li v-if="!isAuthenticated" class="nav-item">
           <router-link to="/FireLogin" class="nav-link" active-class="active">
             Firebase Login

@@ -8,6 +8,7 @@ import LibrarianDashboardView from '@/views/LibrarianDashboardView.vue'
 import GetBookCountView from '@/views/GetBookCountView.vue'
 import LogoutPage from '@/views/LogoutPage.vue'
 import AddBookView from '@/views/AddBookView.vue'
+import WeatherView from '@/views/WeatherView.vue'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import { getFirestore, doc, getDoc } from 'firebase/firestore'
 import { ref } from 'vue'
@@ -70,6 +71,11 @@ const routes = [
     path: "/GetBookCount",
     name: "GetBookCount",
     component: GetBookCountView
+  },
+  {
+    path: "/WeatherCheck",
+    name: "WeatherCheck",
+    component: WeatherView
   }
 ]
 
