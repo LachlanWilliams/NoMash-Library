@@ -27,6 +27,11 @@
             Weather Check
           </router-link>
         </div>
+        <div>
+          <router-link to="/CountBookAPI" class="nav-link" active-class="active">
+            Count Book API
+          </router-link>
+        </div>
         <li v-if="!isAuthenticated" class="nav-item">
           <router-link to="/FireLogin" class="nav-link" active-class="active">
             Firebase Login
